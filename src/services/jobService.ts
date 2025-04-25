@@ -1,4 +1,3 @@
-
 import { JobPosting, mockJobs, mockApplications, Application, JobType, ApplicationStatus } from '../data/mockData';
 
 export const jobService = {
@@ -9,7 +8,7 @@ export const jobService = {
 
   // Get jobs by type (public or internal)
   getJobsByType: (type: JobType): JobPosting[] => {
-    return mockJobs.filter(job => job.type === type);
+    return mockJobs.filter(job => job.tipo === type);
   },
 
   // Get job by id

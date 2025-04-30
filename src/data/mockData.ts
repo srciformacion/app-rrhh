@@ -1,4 +1,3 @@
-
 // Types for our mock data
 export type UserRole = 'rrhh' | 'trabajador' | 'solicitante';
 export type JobType = 'publico' | 'interno';
@@ -8,6 +7,7 @@ export type ContactPreference = 'email' | 'telefono' | 'ambos';
 export interface User {
   id: string;
   nombre: string;
+  apellidos?: string; // Added apellidos as optional property
   email: string;
   telefono: string;
   rol: UserRole;
@@ -30,6 +30,9 @@ export interface JobPosting {
   fechaFin: string;
   requisitos: string[];
   createdBy: string; // ID del usuario de RRHH
+  ubicacion?: string;
+  codigoInterno?: string;
+  entidadConvocante?: string;
 }
 
 export interface Application {
@@ -57,7 +60,8 @@ export interface ChatMessage {
 export const mockUsers: User[] = [
   {
     id: '1',
-    nombre: 'Ana García',
+    nombre: 'Ana',
+    apellidos: 'García',
     email: 'ana.garcia@empresa.com',
     telefono: '600123456',
     rol: 'rrhh',
@@ -65,7 +69,8 @@ export const mockUsers: User[] = [
   },
   {
     id: '2',
-    nombre: 'Pedro López',
+    nombre: 'Pedro',
+    apellidos: 'López',
     email: 'pedro.lopez@empresa.com',
     telefono: '600789123',
     rol: 'trabajador',
@@ -74,7 +79,8 @@ export const mockUsers: User[] = [
   },
   {
     id: '3',
-    nombre: 'Laura Martínez',
+    nombre: 'Laura',
+    apellidos: 'Martínez',
     email: 'laura.martinez@empresa.com',
     telefono: '600456789',
     rol: 'trabajador',
@@ -83,7 +89,8 @@ export const mockUsers: User[] = [
   },
   {
     id: '4',
-    nombre: 'Carlos Sánchez',
+    nombre: 'Carlos',
+    apellidos: 'Sánchez',
     email: 'carlos.sanchez@email.com',
     telefono: '600234567',
     rol: 'solicitante',
@@ -94,7 +101,8 @@ export const mockUsers: User[] = [
   },
   {
     id: '5',
-    nombre: 'María Rodríguez',
+    nombre: 'María',
+    apellidos: 'Rodríguez',
     email: 'maria.rodriguez@empresa.com',
     telefono: '600345678',
     rol: 'rrhh',
@@ -102,7 +110,8 @@ export const mockUsers: User[] = [
   },
   {
     id: '6',
-    nombre: 'Javier Martín',
+    nombre: 'Javier',
+    apellidos: 'Martín',
     email: 'javier.martin@email.com',
     telefono: '600567890',
     rol: 'solicitante',
@@ -123,7 +132,10 @@ export const mockJobs: JobPosting[] = [
     fechaInicio: '2024-04-01',
     fechaFin: '2024-05-15',
     requisitos: ['React', 'TypeScript', '3 años de experiencia'],
-    createdBy: '1'
+    createdBy: '1',
+    ubicacion: 'Madrid',
+    codigoInterno: 'DEV-FE-001',
+    entidadConvocante: 'Empresa S.A.'
   },
   {
     id: '2',
@@ -134,7 +146,10 @@ export const mockJobs: JobPosting[] = [
     fechaInicio: '2024-04-10',
     fechaFin: '2024-05-25',
     requisitos: ['SQL', 'Power BI', 'Excel avanzado'],
-    createdBy: '5'
+    createdBy: '5',
+    ubicacion: 'Barcelona',
+    codigoInterno: 'BI-AD-002',
+    entidadConvocante: 'Empresa S.A.'
   },
   {
     id: '3',
@@ -145,7 +160,10 @@ export const mockJobs: JobPosting[] = [
     fechaInicio: '2024-04-05',
     fechaFin: '2024-04-30',
     requisitos: ['3 años en la empresa', 'Evaluación positiva'],
-    createdBy: '1'
+    createdBy: '1',
+    ubicacion: 'Madrid',
+    codigoInterno: 'INT-JE-003',
+    entidadConvocante: 'Departamento RRHH'
   },
   {
     id: '4',
@@ -156,7 +174,10 @@ export const mockJobs: JobPosting[] = [
     fechaInicio: '2024-05-01',
     fechaFin: '2024-05-15',
     requisitos: ['Conocimientos básicos de cloud', 'Departamento de Sistemas'],
-    createdBy: '5'
+    createdBy: '5',
+    ubicacion: 'Online',
+    codigoInterno: 'FORM-AWS-004',
+    entidadConvocante: 'Departamento Formación'
   },
   {
     id: '5',
@@ -167,7 +188,10 @@ export const mockJobs: JobPosting[] = [
     fechaInicio: '2024-04-15',
     fechaFin: '2024-05-30',
     requisitos: ['Experiencia administrativa', 'Conocimientos de legislación laboral'],
-    createdBy: '1'
+    createdBy: '1',
+    ubicacion: 'Valencia',
+    codigoInterno: 'ADM-RH-005',
+    entidadConvocante: 'Empresa S.A.'
   }
 ];
 

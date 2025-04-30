@@ -16,6 +16,7 @@ import { ProcessHeader } from "@/components/processes/ProcessHeader";
 import { ProcessStats } from "@/components/processes/ProcessStats";
 import { ProcessApplicationsTabs } from "@/components/processes/ProcessApplicationsTabs";
 import { ProcessNotFound } from "@/components/processes/ProcessNotFound";
+import { JobApplication } from "@/data/jobTypes";
 
 export default function ProcessApplications() {
   const { hasRole } = useAuth();
@@ -34,7 +35,8 @@ export default function ProcessApplications() {
   }
 
   const process = jobService.getJobById(processId);
-  const allApplications = applicationService.getApplicationsByJobId(processId);
+  // Cast the applications to JobApplication type to match the expected interface
+  const allApplications = applicationService.getApplicationsByJobId(processId) as unknown as JobApplication[];
   const allUsers = userService.getAllUsers();
   
   const pendingApplications = allApplications.filter(app => app.estado === "pendiente");

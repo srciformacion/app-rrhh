@@ -13,6 +13,7 @@ import { ApplicationStatus } from "@/data/mockData";
 import { useToast } from "@/hooks/use-toast";
 import { notificationService } from "@/services/notificationService";
 import { ChevronLeft } from "lucide-react";
+import { JobApplication } from "@/data/jobTypes";
 
 // Import refactored components
 import { ApplicantInfo } from "@/components/applications/ApplicantInfo";
@@ -36,7 +37,8 @@ export default function ApplicationDetail() {
     return <div>ID de solicitud no válido</div>;
   }
 
-  const application = applicationService.getApplicationById(applicationId);
+  // Cast application to JobApplication to match the expected interface
+  const application = applicationService.getApplicationById(applicationId) as unknown as JobApplication;
   
   if (loading) {
     return <LoadingSpinner />;
@@ -57,7 +59,7 @@ export default function ApplicationDetail() {
   }
   
   const applicant = userService.getUserById(application.userId);
-  const job = jobService.getJobById(application.processId);
+  const job = jobService.getJobById(application.processId || application.jobId);
   
   const handleStatusChange = (applicationId: string, newStatus: ApplicationStatus) => {
     applicationService.updateApplicationStatus(applicationId, newStatus);
@@ -83,7 +85,7 @@ export default function ApplicationDetail() {
   return (
     <MainLayout>
       <div className="mb-4">
-        <Link to={`/rrhh/aplicaciones/${application.processId}`} className="text-blue-600 hover:underline text-sm inline-flex items-center">
+        <Link to={`/rrhh/aplicaciones/${application.processId || application.jobId}`} className="text-blue-600 hover:underline text-sm inline-flex items-center">
           <ChevronLeft className="h-4 w-4 mr-1" /> Volver a las solicitudes
         </Link>
       </div>
@@ -94,7 +96,7 @@ export default function ApplicationDetail() {
             Solicitud de {applicant?.nombre || "Candidato"}
           </h1>
           <p className="text-gray-500">
-            Para: {job?.titulo} - Fecha: {new Date(application.fechaPostulacion).toLocaleDateString()}
+            Para: {job?.titulo} - Fecha: {new Date(application.fechaPostulacion || application.fecha).toLocaleDateString()}
           </p>
         </div>
         
@@ -107,7 +109,7 @@ export default function ApplicationDetail() {
         <div className="md:col-span-2 space-y-6">
           <ApplicantInfo 
             applicant={applicant} 
-            applicationDate={application.fechaPostulacion}
+            applicationDate={application.fechaPostulacion || application.fecha}
             status={application.estado}
           />
           

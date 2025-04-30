@@ -51,7 +51,7 @@ export const exportApplicationsToCSV = (applications: JobApplication[], users: U
       Apellidos: user?.apellidos || app.apellidos || '',
       Email: user?.email || app.email || '',
       Telefono: user?.telefono || app.telefono || '',
-      FechaPostulacion: new Date(app.fechaPostulacion).toLocaleDateString(),
+      FechaPostulacion: new Date(app.fechaPostulacion || app.fecha).toLocaleDateString(),
       Estado: app.estado,
       Experiencia: app.experiencia || '',
       Motivacion: app.motivacion || ''

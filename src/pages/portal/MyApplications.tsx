@@ -16,7 +16,7 @@ export default function MyApplications() {
     return <Redirect to="/login" />;
   }
   
-  const userApplications = applicationService.getApplicationsByUserId(currentUser.id);
+  const userApplications = applicationService.getUserApplications(currentUser.id);
   
   const pendingApplications = userApplications.filter(app => app.estado === 'pendiente');
   const approvedApplications = userApplications.filter(app => app.estado === 'aprobado');

@@ -1,4 +1,5 @@
 
+
 import { Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,7 @@ export const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <span className="text-xl font-bold text-hrm-blue">
-                TalentNexus
+                RRHH-Ofertas
               </span>
             </Link>
           </div>
@@ -75,3 +76,4 @@ export const Navbar = () => {
     </header>
   );
 };
+

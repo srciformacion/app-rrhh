@@ -10,10 +10,10 @@ export interface JobPosting {
   fechaFin: string;
   grupoDestinatario: string;
   requisitos: string[];
-  ubicacion: string;
-  codigoInterno: string;
+  ubicacion?: string;
+  codigoInterno?: string;
   pdfBase?: string;
-  entidadConvocante: string;
+  entidadConvocante?: string;
   createdBy?: string;
 }
 

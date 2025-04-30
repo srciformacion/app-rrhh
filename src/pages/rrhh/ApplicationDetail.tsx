@@ -13,7 +13,7 @@ import { ApplicationStatus } from "@/data/mockData";
 import { useToast } from "@/hooks/use-toast";
 import { notificationService } from "@/services/notificationService";
 import { ChevronLeft } from "lucide-react";
-import { JobApplication } from "@/data/jobTypes";
+import { JobApplication, JobPosting } from "@/data/jobTypes";
 
 // Import refactored components
 import { ApplicantInfo } from "@/components/applications/ApplicantInfo";
@@ -59,7 +59,7 @@ export default function ApplicationDetail() {
   }
   
   const applicant = userService.getUserById(application.userId);
-  const job = jobService.getJobById(application.processId || application.jobId);
+  const job = jobService.getJobById(application.processId || application.jobId) as JobPosting;
   
   const handleStatusChange = (applicationId: string, newStatus: ApplicationStatus) => {
     applicationService.updateApplicationStatus(applicationId, newStatus);

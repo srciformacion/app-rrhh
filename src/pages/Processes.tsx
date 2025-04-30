@@ -35,7 +35,7 @@ export default function Processes() {
     ? filteredByStatus 
     : filteredByStatus.filter(job => job.tipo === typeFilter);
   
-  // Filter by search term
+  // Filter by search term with safe check for optional property
   const filteredProcesses = filteredByType.filter(job => 
     job.titulo.toLowerCase().includes(searchTerm.toLowerCase()) || 
     job.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) ||

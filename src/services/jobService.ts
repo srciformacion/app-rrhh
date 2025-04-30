@@ -1,4 +1,6 @@
+
 import { JobPosting, mockJobs, mockApplications, Application, JobType, ApplicationStatus } from '../data/mockData';
+import { JobApplication } from '../data/jobTypes';
 
 export const jobService = {
   // Get all job postings
@@ -95,6 +97,21 @@ export const applicationService = {
     
     // In a real app, this would send a request to an API
     mockApplications.push(newApplication);
+    
+    return newApplication;
+  },
+  
+  // Crear una nueva postulación al proceso
+  submitJobApplication: (application: Omit<JobApplication, 'id' | 'estado' | 'fechaPostulacion'>): JobApplication => {
+    const newApplication: JobApplication = {
+      ...application,
+      id: (Math.floor(Math.random() * 10000) + 1).toString(),
+      estado: 'pendiente',
+      fechaPostulacion: new Date().toISOString()
+    };
+    
+    // En una aplicación real, esto enviaría una solicitud a una API
+    console.log('Nueva postulación recibida:', newApplication);
     
     return newApplication;
   }

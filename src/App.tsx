@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import ProcessDetail from "./pages/ProcessDetail";
 import Processes from "./pages/Processes";
+import JobApplicationForm from "./pages/JobApplicationForm";
 
 // RRHH Pages
 import RRHHDashboard from "./pages/rrhh/Dashboard";
@@ -21,7 +22,6 @@ import ProcessForm from "./pages/rrhh/ProcessForm";
 // Portal de empleo pages
 import JobListings from "./pages/portal/JobListings";
 import JobDetail from "./pages/portal/JobDetail";
-import JobApplicationForm from "./pages/portal/JobApplicationForm";
 import MyApplications from "./pages/portal/MyApplications";
 
 // Worker pages

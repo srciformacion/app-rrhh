@@ -29,9 +29,12 @@ export interface JobApplication {
   cvFile?: File | null;
   otrosDocumentos?: File[] | null;
   processId: string;
+  jobId?: string; // For backwards compatibility
   userId?: string;
   fechaPostulacion: string;
   estado: ApplicationStatus;
+  comentariosRRHH?: string;
+  archivosAdjuntos?: string[];
 }
 
 // Interface para mensajes de notificación

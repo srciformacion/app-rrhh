@@ -34,7 +34,7 @@ export interface JobPosting {
   ubicacion?: string;
   codigoInterno?: string;
   entidadConvocante?: string;
-  pdfBase?: string; // Added this from jobTypes.ts
+  pdfBase?: string;
 }
 
 export interface Application {
@@ -46,6 +46,8 @@ export interface Application {
   motivacion?: string;
   archivosAdjuntos?: string[]; // URLs simuladas para archivos
   comentariosRRHH?: string;
+  processId?: string; // Añadido para compatibilidad
+  fechaPostulacion?: string; // Añadido para compatibilidad
 }
 
 export interface ChatMessage {

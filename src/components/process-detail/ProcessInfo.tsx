@@ -1,5 +1,5 @@
 
-import { JobPosting } from "@/data/jobTypes";
+import { JobPosting } from "@/data/types";
 import { 
   Calendar, 
   Users, 

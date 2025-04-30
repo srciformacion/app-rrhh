@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/UI/StatusBadge";
 import { mockApplications, mockJobs } from "@/data/mockData";
 import { userService } from "@/services/userService";
-import { Users, Award, FileCheck, Building2, Clock } from "lucide-react";
+import { Users, Award, FileCheck, Building2, Clock, Workflow } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 export default function RRHHDashboard() {
   const { hasRole } = useAuth();
@@ -62,8 +63,14 @@ export default function RRHHDashboard() {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle>Procesos activos</CardTitle>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/rrhh/procesos" className="flex items-center">
+                <Workflow className="mr-1 h-4 w-4" />
+                <span>Ver todos</span>
+              </Link>
+            </Button>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -88,11 +95,6 @@ export default function RRHHDashboard() {
                   No hay procesos activos actualmente
                 </div>
               )}
-              <div className="text-center mt-4">
-                <Link to="/rrhh/procesos" className="text-sm text-hrm-blue hover:underline">
-                  Ver todos los procesos
-                </Link>
-              </div>
             </div>
           </CardContent>
         </Card>

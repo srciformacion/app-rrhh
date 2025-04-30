@@ -1,5 +1,4 @@
 
-
 import { Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -33,9 +32,14 @@ export const Navbar = () => {
           
           <nav className="hidden md:flex space-x-4 items-center">
             {isAuthenticated && currentUser?.rol === 'rrhh' && (
-              <Link to="/rrhh" className="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
-                Panel RRHH
-              </Link>
+              <>
+                <Link to="/rrhh" className="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                  Panel RRHH
+                </Link>
+                <Link to="/rrhh/procesos" className="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                  Procesos
+                </Link>
+              </>
             )}
             {isAuthenticated && currentUser?.rol === 'trabajador' && (
               <Link to="/trabajadores" className="px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
@@ -76,4 +80,3 @@ export const Navbar = () => {
     </header>
   );
 };
-

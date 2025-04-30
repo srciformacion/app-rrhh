@@ -21,6 +21,7 @@ import { StatusBadge } from "@/components/UI/StatusBadge";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { ApplicationStatus } from "@/data/mockData";
+import { notificationService } from "@/services/notificationService";
 import { 
   ChevronLeft, 
   Download, 
@@ -71,10 +72,23 @@ export default function ApplicationDetail() {
   
   const handleStatusChange = (newStatus: ApplicationStatus) => {
     applicationService.updateApplicationStatus(applicationId, newStatus);
+    
+    const statusMessages = {
+      aprobado: "La candidatura ha sido aprobada",
+      rechazado: "La candidatura ha sido rechazada",
+      pendiente: "La candidatura ha sido marcada como pendiente"
+    };
+    
     toast({
       title: "Estado actualizado",
-      description: `La solicitud ha sido marcada como ${newStatus}.`
+      description: statusMessages[newStatus]
     });
+    
+    notificationService.createNotification(
+      "Estado de candidatura actualizado",
+      `Has actualizado el estado de la candidatura de ${applicant?.nombre || "un candidato"} a ${newStatus}`,
+      newStatus === "aprobado" ? "success" : newStatus === "rechazado" ? "warning" : "info"
+    );
   };
   
   const handleSaveComments = () => {
@@ -83,6 +97,21 @@ export default function ApplicationDetail() {
       title: "Comentarios guardados",
       description: "Los comentarios han sido guardados correctamente."
     });
+    
+    notificationService.createNotification(
+      "Comentarios guardados", 
+      `Has actualizado los comentarios para la candidatura de ${applicant?.nombre || "un candidato"}`,
+      "info"
+    );
+  };
+  
+  const handleExportCV = () => {
+    toast({
+      title: "Descargando documento",
+      description: "El CV se está descargando"
+    });
+    
+    // En una app real, esto descargaría el documento
   };
   
   return (
@@ -211,10 +240,8 @@ export default function ApplicationDetail() {
               <CardContent>
                 <div className="space-y-2">
                   {application.archivosAdjuntos.map((archivo, index) => (
-                    <Button key={index} variant="outline" className="w-full justify-start" asChild>
-                      <a href="#" onClick={(e) => e.preventDefault()}>
-                        <Download className="mr-2 h-4 w-4" /> {archivo}
-                      </a>
+                    <Button key={index} variant="outline" className="w-full justify-start" onClick={handleExportCV}>
+                      <Download className="mr-2 h-4 w-4" /> {archivo}
                     </Button>
                   ))}
                 </div>
@@ -324,6 +351,12 @@ export default function ApplicationDetail() {
                       title: "Función en desarrollo",
                       description: "Esta funcionalidad estará disponible próximamente."
                     });
+                    
+                    notificationService.createNotification(
+                      "Acción no disponible",
+                      "Has intentado usar una funcionalidad que está en desarrollo",
+                      "warning"
+                    );
                   }}
                 >
                   <Mail className="mr-2 h-4 w-4" /> 

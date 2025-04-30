@@ -15,6 +15,8 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { ApplicationStatus } from "@/data/mockData";
 import { ChevronLeft, Users, FileText, CalendarCheck, Download } from "lucide-react";
+import { exportApplicationsToCSV } from "@/utils/exportUtils";
+import { notificationService } from "@/services/notificationService";
 
 export default function ProcessApplications() {
   const { hasRole } = useAuth();
@@ -65,18 +67,59 @@ export default function ProcessApplications() {
   
   const handleStatusChange = (applicationId: string, newStatus: ApplicationStatus) => {
     applicationService.updateApplicationStatus(applicationId, newStatus);
+    
+    // Mostrar toast de confirmación
+    const statusMessages = {
+      aprobado: "La candidatura ha sido aprobada",
+      rechazado: "La candidatura ha sido rechazada",
+      pendiente: "La candidatura ha sido marcada como pendiente"
+    };
+    
     toast({
       title: "Estado actualizado",
-      description: `La solicitud ha sido marcada como ${newStatus}.`
+      description: statusMessages[newStatus]
     });
+    
+    // Crear notificación interna
+    notificationService.createNotification(
+      "Estado de candidatura actualizado",
+      `Has cambiado el estado de una candidatura a ${newStatus}`,
+      newStatus === "aprobado" ? "success" : newStatus === "rechazado" ? "warning" : "info"
+    );
   };
   
   const handleExport = () => {
+    // Exportar los datos de las solicitudes activas en el tab actual
+    let applicationsToExport;
+    
+    switch (activeTab) {
+      case "pending":
+        applicationsToExport = pendingApplications;
+        break;
+      case "approved":
+        applicationsToExport = approvedApplications;
+        break;
+      case "rejected":
+        applicationsToExport = rejectedApplications;
+        break;
+      default:
+        applicationsToExport = allApplications;
+    }
+    
+    const filename = `candidatos-${process.titulo.replace(/\s+/g, '-').toLowerCase()}-${new Date().toISOString().slice(0, 10)}`;
+    
+    exportApplicationsToCSV(applicationsToExport, allUsers, filename);
+    
     toast({
-      title: "Exportación en proceso",
-      description: "Los datos se están exportando a Excel."
+      title: "Exportación completada",
+      description: "Los datos han sido exportados correctamente"
     });
-    // Implementación futura para exportar a Excel
+    
+    notificationService.createNotification(
+      "Datos exportados",
+      `Has exportado los datos de ${applicationsToExport.length} candidatos del proceso "${process.titulo}"`,
+      "success"
+    );
   };
   
   return (
@@ -174,6 +217,7 @@ export default function ProcessApplications() {
                 applications={allApplications}
                 users={allUsers}
                 onStatusChange={handleStatusChange}
+                onExportData={handleExport}
               />
             </TabsContent>
             
@@ -182,6 +226,7 @@ export default function ProcessApplications() {
                 applications={pendingApplications}
                 users={allUsers}
                 onStatusChange={handleStatusChange}
+                onExportData={handleExport}
               />
             </TabsContent>
             
@@ -190,6 +235,7 @@ export default function ProcessApplications() {
                 applications={approvedApplications}
                 users={allUsers}
                 onStatusChange={handleStatusChange}
+                onExportData={handleExport}
               />
             </TabsContent>
             
@@ -198,6 +244,7 @@ export default function ProcessApplications() {
                 applications={rejectedApplications}
                 users={allUsers}
                 onStatusChange={handleStatusChange}
+                onExportData={handleExport}
               />
             </TabsContent>
           </Tabs>

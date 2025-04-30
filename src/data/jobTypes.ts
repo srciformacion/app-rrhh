@@ -1,7 +1,6 @@
 
 import { JobType, ApplicationStatus } from "./mockData";
 
-// Extendemos el tipo JobPosting para incluir las propiedades faltantes
 export interface JobPosting {
   id: string;
   titulo: string;
@@ -33,4 +32,15 @@ export interface JobApplication {
   userId?: string;
   fechaPostulacion: string;
   estado: ApplicationStatus;
+}
+
+// Interface para mensajes de notificación
+export interface NotificationMessage {
+  id: string;
+  title: string;
+  message: string;
+  type: "info" | "success" | "warning" | "error";
+  read: boolean;
+  createdAt: string;
+  userId?: string;
 }

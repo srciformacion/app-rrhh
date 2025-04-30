@@ -18,6 +18,8 @@ import JobApplicationForm from "./pages/JobApplicationForm";
 import RRHHDashboard from "./pages/rrhh/Dashboard";
 import RRHHProcesses from "./pages/rrhh/Processes";
 import ProcessForm from "./pages/rrhh/ProcessForm";
+import ProcessApplications from "./pages/rrhh/ProcessApplications";
+import ApplicationDetail from "./pages/rrhh/ApplicationDetail";
 
 // Portal de empleo pages
 import JobListings from "./pages/portal/JobListings";
@@ -58,6 +60,8 @@ const App = () => (
             <Route path="/rrhh/procesos" element={<RRHHProcesses />} />
             <Route path="/rrhh/procesos/nuevo" element={<ProcessForm />} />
             <Route path="/rrhh/procesos/:id" element={<ProcessForm />} />
+            <Route path="/rrhh/aplicaciones/:processId" element={<ProcessApplications />} />
+            <Route path="/rrhh/aplicacion/:applicationId" element={<ApplicationDetail />} />
             
             {/* Worker routes */}
             <Route path="/trabajadores" element={<WorkerDashboard />} />

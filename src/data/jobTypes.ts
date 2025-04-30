@@ -15,6 +15,7 @@ export interface JobPosting {
   codigoInterno?: string;
   pdfBase?: string;
   entidadConvocante?: string;
+  createdBy?: string;
 }
 
 // Modelo para la postulación a un proceso

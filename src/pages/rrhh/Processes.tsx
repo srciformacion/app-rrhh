@@ -23,7 +23,7 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Workflow, CalendarCheck, ClipboardList, FilePlus } from "lucide-react";
+import { Workflow, CalendarCheck, FilePlus, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
@@ -175,6 +175,11 @@ export default function Processes() {
                             <Button variant="outline" size="sm" asChild>
                               <Link to={`/rrhh/procesos/${job.id}`}>
                                 Ver detalle
+                              </Link>
+                            </Button>
+                            <Button variant="outline" size="sm" asChild>
+                              <Link to={`/rrhh/aplicaciones/${job.id}`}>
+                                <Users className="mr-1 h-4 w-4" /> Candidatos
                               </Link>
                             </Button>
                           </div>

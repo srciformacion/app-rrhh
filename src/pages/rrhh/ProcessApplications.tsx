@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { MainLayout } from "@/components/Layout/MainLayout";
@@ -9,14 +8,14 @@ import { Redirect } from "@/components/UI/Redirect";
 import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { ApplicationStatus } from "@/data/mockData";
+import { ApplicationStatus } from "@/data/types";
 import { exportApplicationsToCSV } from "@/utils/exportUtils";
 import { notificationService } from "@/services/notificationService";
 import { ProcessHeader } from "@/components/processes/ProcessHeader";
 import { ProcessStats } from "@/components/processes/ProcessStats";
 import { ProcessApplicationsTabs } from "@/components/processes/ProcessApplicationsTabs";
 import { ProcessNotFound } from "@/components/processes/ProcessNotFound";
-import { JobApplication } from "@/data/jobTypes";
+import { JobApplication } from "@/data/types";
 
 export default function ProcessApplications() {
   const { hasRole } = useAuth();

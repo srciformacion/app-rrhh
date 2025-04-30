@@ -1,11 +1,11 @@
-
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { MainLayout } from "@/components/Layout/MainLayout";
-import { jobService, applicationService } from "@/services/jobService";
+import { jobService } from "@/services/jobService";
+import { applicationService } from "@/services/jobService";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/components/ui/use-toast";
 import {

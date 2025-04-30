@@ -1,19 +1,17 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { MainLayout } from "@/components/Layout/MainLayout";
-import { applicationService } from "@/services/jobService";
+import { jobService, applicationService } from "@/services/jobService";
 import { userService } from "@/services/userService";
-import { jobService } from "@/services/jobService";
 import { useAuth } from "@/context/AuthContext";
 import { Redirect } from "@/components/UI/Redirect";
 import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
 import { Button } from "@/components/ui/button";
-import { ApplicationStatus } from "@/data/mockData";
+import { ApplicationStatus } from "@/data/types";
 import { useToast } from "@/hooks/use-toast";
 import { notificationService } from "@/services/notificationService";
 import { ChevronLeft } from "lucide-react";
-import { JobApplication, JobPosting } from "@/data/jobTypes";
+import { JobApplication, JobPosting } from "@/data/types";
 
 // Import refactored components
 import { ApplicantInfo } from "@/components/applications/ApplicantInfo";

@@ -33,6 +33,22 @@ export const jobService = {
     return mockJobs.filter(job => job.tipo === 'publico');
   },
 
+  // Get active public jobs (new method)
+  getActivePublicJobs: (): JobPosting[] => {
+    const today = new Date().toISOString().split('T')[0];
+    return mockJobs.filter(job => 
+      job.tipo === 'publico' && job.fechaInicio <= today && job.fechaFin >= today
+    );
+  },
+
+  // Get active internal jobs (new method)
+  getActiveInternalJobs: (): JobPosting[] => {
+    const today = new Date().toISOString().split('T')[0];
+    return mockJobs.filter(job => 
+      job.tipo === 'interno' && job.fechaInicio <= today && job.fechaFin >= today
+    );
+  },
+
   // Get applications for a specific job
   getJobApplications: (jobId: string): Application[] => {
     return mockApplications.filter(app => app.jobId === jobId);
@@ -122,7 +138,7 @@ export const jobService = {
       apellidos: user.apellidos || '',
       email: user.email,
       telefono: user.telefono,
-      experiencia: '',
+      experiencia: application.experiencia || '',
       motivacion: application.motivacion || '',
       cvFile: null,
       otrosDocumentos: null,
@@ -135,5 +151,52 @@ export const jobService = {
       archivosAdjuntos: application.archivosAdjuntos || [],
       fecha: application.fecha
     };
+  },
+
+  // Create a new job
+  createJob: (jobData: Partial<JobPosting>): JobPosting => {
+    const newJob: JobPosting = {
+      id: (mockJobs.length + 1).toString(),
+      titulo: jobData.titulo || "",
+      descripcion: jobData.descripcion || "",
+      tipo: jobData.tipo || "publico",
+      grupoDestinatario: jobData.grupoDestinatario || "",
+      fechaInicio: jobData.fechaInicio || new Date().toISOString().split('T')[0],
+      fechaFin: jobData.fechaFin || new Date().toISOString().split('T')[0],
+      requisitos: jobData.requisitos || [],
+      createdBy: jobData.createdBy || "",
+      ubicacion: jobData.ubicacion,
+      codigoInterno: jobData.codigoInterno,
+      entidadConvocante: jobData.entidadConvocante,
+      pdfBase: jobData.pdfBase
+    };
+
+    mockJobs.push(newJob);
+    return newJob;
+  }
+};
+
+// Export applicationService as an alias to jobService for backward compatibility
+export const applicationService = {
+  getApplicationById: jobService.getApplicationById,
+  getApplicationsByJobId: jobService.getJobApplications,
+  getUserApplications: jobService.getUserApplications,
+  updateApplicationStatus: jobService.updateApplicationStatus,
+  submitJobApplication: (data: any) => {
+    // Map the data from JobApplication format to Application format
+    const application: Partial<Application> & { userId: string; jobId: string } = {
+      userId: data.userId || "",
+      jobId: data.processId || "",
+      estado: "pendiente",
+      fecha: new Date().toISOString().split('T')[0],
+      motivacion: data.motivacion,
+      nombre: data.nombre,
+      apellidos: data.apellidos,
+      email: data.email,
+      telefono: data.telefono,
+      experiencia: data.experiencia
+    };
+    
+    return jobService.saveApplication(application);
   }
 };

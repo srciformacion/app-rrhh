@@ -1,6 +1,5 @@
-
-import { JobApplication } from "@/data/jobTypes";
-import { User } from "@/data/mockData";
+import { JobApplication } from "@/data/types";
+import { User } from "@/data/types";
 
 // Función para exportar datos a CSV
 export const exportToCSV = (data: any[], filename: string) => {

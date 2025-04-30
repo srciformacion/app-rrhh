@@ -1,9 +1,8 @@
-
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Download, FileText } from "lucide-react";
-import { JobPosting } from "@/data/jobTypes";
+import { JobPosting } from "@/data/types";
 
 interface ProcessHeaderProps {
   process: JobPosting;

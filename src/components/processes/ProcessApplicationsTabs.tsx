@@ -1,8 +1,7 @@
-
 import { ApplicationsList } from "@/components/UI/ApplicationsList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { JobApplication } from "@/data/jobTypes";
-import { ApplicationStatus, User } from "@/data/mockData";
+import { JobApplication } from "@/data/types";
+import { ApplicationStatus, User } from "@/data/types";
 
 interface ProcessApplicationsTabsProps {
   allApplications: JobApplication[];

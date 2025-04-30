@@ -1,24 +1,27 @@
-
+import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/Layout/MainLayout";
+import { userService } from "@/services/userService";
 import { useAuth } from "@/context/AuthContext";
-import { Redirect } from "@/components/UI/Redirect";
-import { jobService } from "@/services/jobService";
-import { applicationService } from "@/services/jobService";
-import { JobCard } from "@/components/UI/JobCard";
-import { StatusBadge } from "@/components/UI/StatusBadge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { jobService, applicationService } from "@/services/jobService";
 import { Link } from "react-router-dom";
+import { JobCard } from "@/components/UI/JobCard";
+import { Redirect } from "@/components/UI/Redirect";
+import { LoadingSpinner } from "@/components/UI/LoadingSpinner";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { UserNav } from "@/components/Layout/UserNav";
+import { DashboardCard } from "@/components/UI/DashboardCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function WorkerDashboard() {
-  const { currentUser, hasRole } = useAuth();
+  const { currentUser, isAuthenticated, hasRole } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const availableJobs = jobService.getActiveInternalJobs();
+  const myApplications = currentUser ? applicationService.getUserApplications(currentUser.id) : [];
   
   if (!hasRole('trabajador')) {
     return <Redirect to="/login" />;
   }
-  
-  const internalJobs = jobService.getActiveInternalJobs();
-  const userApplications = applicationService.getApplicationsByUserId(currentUser!.id);
   
   const getJobTitle = (jobId: string) => {
     const job = jobService.getJobById(jobId);
@@ -39,9 +42,9 @@ export default function WorkerDashboard() {
               <CardTitle>Procesos internos activos</CardTitle>
             </CardHeader>
             <CardContent>
-              {internalJobs.length > 0 ? (
+              {availableJobs.length > 0 ? (
                 <div className="grid gap-6">
-                  {internalJobs.map(job => (
+                  {availableJobs.map(job => (
                     <JobCard key={job.id} job={job} />
                   ))}
                 </div>
@@ -60,9 +63,9 @@ export default function WorkerDashboard() {
               <CardTitle>Mis participaciones</CardTitle>
             </CardHeader>
             <CardContent>
-              {userApplications.length > 0 ? (
+              {myApplications.length > 0 ? (
                 <div className="space-y-4">
-                  {userApplications.slice(0, 5).map(application => (
+                  {myApplications.slice(0, 5).map(application => (
                     <div key={application.id} className="p-3 border rounded-lg">
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-medium">{getJobTitle(application.jobId)}</h3>
@@ -74,7 +77,7 @@ export default function WorkerDashboard() {
                     </div>
                   ))}
                   
-                  {userApplications.length > 5 && (
+                  {myApplications.length > 5 && (
                     <div className="text-center mt-4">
                       <Link to="/trabajadores/participaciones" className="text-sm text-hrm-blue hover:underline">
                         Ver todas las participaciones

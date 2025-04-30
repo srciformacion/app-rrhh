@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { JobPosting } from "@/data/jobTypes";
+import { JobPosting } from "@/data/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Briefcase } from "lucide-react";

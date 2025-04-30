@@ -1,6 +1,5 @@
-
 import { toast } from "@/components/ui/sonner";
-import { NotificationMessage } from "@/data/jobTypes";
+import { NotificationMessage } from "@/data/types";
 
 // Mock de notificaciones (en una app real, esto estaría en una base de datos)
 const mockNotifications: NotificationMessage[] = [];

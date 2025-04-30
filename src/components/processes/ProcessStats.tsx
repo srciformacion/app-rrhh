@@ -1,6 +1,5 @@
-
 import { Card, CardContent } from "@/components/ui/card";
-import { JobApplication } from "@/data/jobTypes";
+import { JobApplication } from "@/data/types";
 
 interface ProcessStatsProps {
   allApplications: JobApplication[];

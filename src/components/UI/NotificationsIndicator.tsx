@@ -9,7 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { NotificationMessage } from "@/data/jobTypes";
+import { NotificationMessage } from "@/data/types";
 import { cn } from "@/lib/utils";
 
 export const NotificationsIndicator = () => {

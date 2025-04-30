@@ -48,6 +48,11 @@ export interface Application {
   comentariosRRHH?: string;
   processId?: string; // Añadido para compatibilidad
   fechaPostulacion?: string; // Añadido para compatibilidad
+  nombre?: string; // For compatibility with JobApplication interface
+  apellidos?: string; // For compatibility with JobApplication interface
+  email?: string; // For compatibility with JobApplication interface
+  telefono?: string; // For compatibility with JobApplication interface
+  experiencia?: string; // For compatibility with JobApplication interface
 }
 
 export interface ChatMessage {
@@ -58,4 +63,35 @@ export interface ChatMessage {
   timestamp: string;
   leido: boolean;
   adjuntos?: string[];
+}
+
+// Adding types that were previously in jobTypes.ts
+export interface JobApplication {
+  id: string;
+  nombre: string;
+  apellidos: string;
+  email: string;
+  telefono: string;
+  experiencia?: string;
+  motivacion?: string;
+  cvFile?: File | null;
+  otrosDocumentos?: File[] | null;
+  processId?: string;
+  jobId?: string;
+  userId?: string;
+  fechaPostulacion?: string;
+  estado?: ApplicationStatus;
+  comentariosRRHH?: string;
+  archivosAdjuntos?: string[];
+  fecha?: string;
+}
+
+export interface NotificationMessage {
+  id: string;
+  title: string;
+  message: string;
+  type: "info" | "success" | "warning" | "error";
+  read: boolean;
+  createdAt: string;
+  userId?: string;
 }

@@ -10,10 +10,12 @@ import { AuthProvider } from "./context/AuthContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import ProcessDetail from "./pages/ProcessDetail";
+import Processes from "./pages/Processes";
 
 // RRHH Pages
 import RRHHDashboard from "./pages/rrhh/Dashboard";
-import Processes from "./pages/rrhh/Processes";
+import RRHHProcesses from "./pages/rrhh/Processes";
 import ProcessForm from "./pages/rrhh/ProcessForm";
 
 // Portal de empleo pages
@@ -41,6 +43,9 @@ const App = () => (
             {/* Public routes */}
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/procesos" element={<Processes />} />
+            <Route path="/procesos/:processId" element={<ProcessDetail />} />
+            <Route path="/aplicar/:processId" element={<JobApplicationForm />} />
             
             {/* Portal de empleo routes */}
             <Route path="/portal-empleo" element={<JobListings />} />
@@ -50,7 +55,7 @@ const App = () => (
             
             {/* RRHH routes */}
             <Route path="/rrhh" element={<RRHHDashboard />} />
-            <Route path="/rrhh/procesos" element={<Processes />} />
+            <Route path="/rrhh/procesos" element={<RRHHProcesses />} />
             <Route path="/rrhh/procesos/nuevo" element={<ProcessForm />} />
             <Route path="/rrhh/procesos/:id" element={<ProcessForm />} />
             

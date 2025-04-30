@@ -1,3 +1,4 @@
+import { StatusBadge } from '@/components/StatusBadge'; // ajusta la ruta si es diferente
 import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { userService } from "@/services/userService";

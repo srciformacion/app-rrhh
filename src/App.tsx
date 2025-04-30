@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 // RRHH Pages
 import RRHHDashboard from "./pages/rrhh/Dashboard";
 import Processes from "./pages/rrhh/Processes";
+import ProcessForm from "./pages/rrhh/ProcessForm";
 
 // Portal de empleo pages
 import JobListings from "./pages/portal/JobListings";
@@ -50,6 +51,8 @@ const App = () => (
             {/* RRHH routes */}
             <Route path="/rrhh" element={<RRHHDashboard />} />
             <Route path="/rrhh/procesos" element={<Processes />} />
+            <Route path="/rrhh/procesos/nuevo" element={<ProcessForm />} />
+            <Route path="/rrhh/procesos/:id" element={<ProcessForm />} />
             
             {/* Worker routes */}
             <Route path="/trabajadores" element={<WorkerDashboard />} />

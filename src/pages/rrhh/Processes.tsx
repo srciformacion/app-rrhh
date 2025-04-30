@@ -23,7 +23,7 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Workflow, CalendarCheck, ClipboardList } from "lucide-react";
+import { Workflow, CalendarCheck, ClipboardList, FilePlus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
@@ -74,8 +74,10 @@ export default function Processes() {
           <p className="text-gray-500 mt-1">Gestión de todos los procesos activos e históricos</p>
         </div>
         <div className="mt-4 md:mt-0">
-          <Button>
-            <ClipboardList className="mr-2 h-4 w-4" /> Nuevo proceso
+          <Button asChild>
+            <Link to="/rrhh/procesos/nuevo">
+              <FilePlus className="mr-2 h-4 w-4" /> Nuevo proceso
+            </Link>
           </Button>
         </div>
       </div>
@@ -162,9 +164,11 @@ export default function Processes() {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge variant={isActive ? "success" : "secondary"} className={isActive ? "bg-green-500" : ""}>
-                            {isActive ? "Activo" : "Finalizado"}
-                          </Badge>
+                          {isActive ? (
+                            <Badge className="bg-green-500">Activo</Badge>
+                          ) : (
+                            <Badge variant="secondary">Finalizado</Badge>
+                          )}
                         </TableCell>
                         <TableCell>
                           <div className="flex space-x-2">

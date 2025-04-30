@@ -1,5 +1,6 @@
 
-import { User, mockUsers, UserRole } from '../data/mockData';
+import { User, UserRole } from '../data/types';
+import { mockUsers } from '../data/mockUsers';
 
 export const userService = {
   // Get all users

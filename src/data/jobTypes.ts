@@ -1,5 +1,5 @@
 
-import { JobType, ApplicationStatus } from "./mockData";
+import { JobType, ApplicationStatus } from "./types";
 
 export interface JobPosting {
   id: string;

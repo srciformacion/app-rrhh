@@ -35,6 +35,7 @@ export interface JobApplication {
   estado: ApplicationStatus;
   comentariosRRHH?: string;
   archivosAdjuntos?: string[];
+  fecha?: string; // Added for compatibility with Application interface
 }
 
 // Interface para mensajes de notificación

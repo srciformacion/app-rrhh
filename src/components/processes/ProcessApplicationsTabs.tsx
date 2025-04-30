@@ -46,7 +46,7 @@ export function ProcessApplicationsTabs({
       
       <TabsContent value="applications">
         <ApplicationsList 
-          applications={allApplications}
+          applications={allApplications as any}
           users={users}
           onStatusChange={handleStatusChange}
           onExportData={handleExport}
@@ -55,7 +55,7 @@ export function ProcessApplicationsTabs({
       
       <TabsContent value="pending">
         <ApplicationsList 
-          applications={pendingApplications}
+          applications={pendingApplications as any}
           users={users}
           onStatusChange={handleStatusChange}
           onExportData={handleExport}
@@ -64,7 +64,7 @@ export function ProcessApplicationsTabs({
       
       <TabsContent value="approved">
         <ApplicationsList 
-          applications={approvedApplications}
+          applications={approvedApplications as any}
           users={users}
           onStatusChange={handleStatusChange}
           onExportData={handleExport}
@@ -73,7 +73,7 @@ export function ProcessApplicationsTabs({
       
       <TabsContent value="rejected">
         <ApplicationsList 
-          applications={rejectedApplications}
+          applications={rejectedApplications as any}
           users={users}
           onStatusChange={handleStatusChange}
           onExportData={handleExport}

@@ -16,11 +16,12 @@ export default function MyApplications() {
     return <Redirect to="/login" />;
   }
   
-  const userApplications = applicationService.getUserApplications(currentUser.id);
+  // Replace the line with getApplicationsByUserId with:
+  const applications = currentUser ? applicationService.getUserApplications(currentUser.id) : [];
   
-  const pendingApplications = userApplications.filter(app => app.estado === 'pendiente');
-  const approvedApplications = userApplications.filter(app => app.estado === 'aprobado');
-  const rejectedApplications = userApplications.filter(app => app.estado === 'rechazado');
+  const pendingApplications = applications.filter(app => app.estado === 'pendiente');
+  const approvedApplications = applications.filter(app => app.estado === 'aprobado');
+  const rejectedApplications = applications.filter(app => app.estado === 'rechazado');
   
   const getJobTitle = (jobId: string) => {
     const job = jobService.getJobById(jobId);
@@ -37,7 +38,7 @@ export default function MyApplications() {
       <Tabs defaultValue="all" className="mb-8">
         <TabsList>
           <TabsTrigger value="all">
-            Todas ({userApplications.length})
+            Todas ({applications.length})
           </TabsTrigger>
           <TabsTrigger value="pending">
             Pendientes ({pendingApplications.length})
@@ -51,7 +52,7 @@ export default function MyApplications() {
         </TabsList>
         
         <TabsContent value="all">
-          <ApplicationList applications={userApplications} getJobTitle={getJobTitle} />
+          <ApplicationList applications={applications} getJobTitle={getJobTitle} />
         </TabsContent>
         
         <TabsContent value="pending">

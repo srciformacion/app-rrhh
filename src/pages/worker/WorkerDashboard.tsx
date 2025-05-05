@@ -1,4 +1,5 @@
-import { StatusBadge } from '@/components/StatusBadge'; // ajusta la ruta si es diferente
+
+import { StatusBadge } from '@/components/UI/StatusBadge'; // corrected import path
 import { useState, useEffect } from "react";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { userService } from "@/services/userService";
@@ -17,7 +18,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function WorkerDashboard() {
   const { currentUser, isAuthenticated, hasRole } = useAuth();
   const [loading, setLoading] = useState(false);
-  const availableJobs = jobService.getActiveInternalJobs();
+  const availableJobs = jobService.getInternalJobs().filter(job => {
+    const now = new Date().toISOString().split('T')[0];
+    return job.fechaInicio <= now && job.fechaFin >= now;
+  });
   const myApplications = currentUser ? applicationService.getUserApplications(currentUser.id) : [];
   
   if (!hasRole('trabajador')) {
